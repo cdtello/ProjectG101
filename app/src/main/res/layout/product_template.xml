@@ -23,19 +23,23 @@
                 android:id="@+id/tvNameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:fontFamily="@font/courgette_regular"
+                android:layout_weight="1"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/tvDescriptionProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/courgette_regular"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/tvPriceProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="TextView" />
         </LinearLayout>
 
@@ -45,4 +49,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="CheckBox" />
+
 </LinearLayout>

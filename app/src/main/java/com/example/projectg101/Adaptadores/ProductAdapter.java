@@ -1,6 +1,7 @@
 package com.example.projectg101.Adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectg101.Entidades.Product;
+import com.example.projectg101.MainActivity2;
 import com.example.projectg101.R;
 
 import java.util.ArrayList;
@@ -62,7 +64,12 @@ public class ProductAdapter extends BaseAdapter {
         imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "Hola "+product.getName(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context.getApplicationContext(), MainActivity2.class);
+                intent.putExtra("name", product.getName());
+                intent.putExtra("description", product.getDescription());
+                intent.putExtra("price", product.getPrice());
+                intent.putExtra("image", product.getImage());
+                context.startActivity(intent);
             }
         });
         return convertView;
