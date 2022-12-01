@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">ProjectG101</string>
     <string name="text_title_products">Productos</string>
+
+    // ProductForm Strings
+    <string name="product_form_title">PRODUCTOS</string>
+    <string name="product_form_name">Nombre:</string>
+    <string name="product_form_description">Descripcion:</string>
+    <string name="product_form_price">Precio:</string>
+    <string name="product_form_btn">REGISTRAR</string>
 </resources>

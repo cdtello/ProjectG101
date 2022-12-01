@@ -1,16 +1,26 @@
 package com.example.projectg101;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.projectg101.Adaptadores.ProductAdapter;
+import com.example.projectg101.DB.DBHelper;
 import com.example.projectg101.Entidades.Product;
+import com.example.projectg101.Servicios.ProductService;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private DBHelper dbHelper;
+    private ProductService productService;
     private ListView listViewProducts;
     private ProductAdapter productAdapter;
     private ArrayList<Product> arrayProducts;
@@ -22,28 +32,40 @@ public class MainActivity extends AppCompatActivity {
 
         listViewProducts = (ListView) findViewById(R.id.listViewProducts);
         arrayProducts = new ArrayList<>();
-        int img = R.drawable.ic_launcher_background;
-        Product product1 = new Product(img, "Producto1", "Descripcion 1 ", 1000);
-        Product product2 = new Product(img, "Producto2", "Descripcion 2 ", 2000);
-        Product product3 = new Product(img, "Producto3", "Descripcion 3 ", 3000);
-        Product product4 = new Product(img, "Producto4", "Descripcion 4 ", 4000);
-        Product product5 = new Product(img, "Producto5", "Descripcion 5 ", 5000);
-        Product product6 = new Product(img, "Producto6", "Descripcion 6 ", 6000);
-        Product product7 = new Product(img, "Producto7", "Descripcion 7 ", 7000);
-        Product product8 = new Product(img, "Producto8", "Descripcion 8 ", 8000);
-        Product product9 = new Product(img, "Producto9", "Descripcion 9 ", 9000);
 
-        arrayProducts.add(product1);
-        arrayProducts.add(product2);
-        arrayProducts.add(product3);
-        arrayProducts.add(product4);
-        arrayProducts.add(product5);
-        arrayProducts.add(product6);
-        arrayProducts.add(product7);
-        arrayProducts.add(product8);
-        arrayProducts.add(product9);
+        try {
+            dbHelper = new DBHelper(this);
+            productService = new ProductService();
+            arrayProducts = productService.cursorToArrayList(dbHelper.getProducts());
+        }catch (Exception e){
+            Log.e("DB Get", e.toString());
+        }
 
         productAdapter = new ProductAdapter(this, arrayProducts);
         listViewProducts.setAdapter(productAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.itemAdd:
+                Intent intent = new Intent(getApplicationContext(), ProductForm.class);
+                startActivity(intent);
+                return true;
+            case R.id.itemFavorite:
+                Toast.makeText(getApplicationContext(),"Favoritos",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.itemShare:
+                Toast.makeText(getApplicationContext(),"Compartir",Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
