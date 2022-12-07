@@ -58,10 +58,10 @@ public class ProductAdapter extends BaseAdapter {
         TextView tvPriceProduct = (TextView) convertView.findViewById(R.id.tvPriceProduct);
         CheckBox checkBoxProduct = (CheckBox) convertView.findViewById(R.id.checkBoxProduct);
 
-        byte[] image = product.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        //byte[] image = product.getImage();
+        //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-        imgProduct.setImageBitmap(bitmap);
+        //imgProduct.setImageBitmap(bitmap);
         tvNameProduct.setText(product.getName());
         tvDescriptionProduct.setText(product.getDescription());
         tvPriceProduct.setText(String.valueOf(product.getPrice()));

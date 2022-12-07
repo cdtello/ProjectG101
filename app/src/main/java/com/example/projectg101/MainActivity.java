@@ -1,5 +1,7 @@
 package com.example.projectg101;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,14 +14,27 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.projectg101.Adaptadores.ProductAdapter;
+import com.example.projectg101.DB.DBFirebase;
 import com.example.projectg101.DB.DBHelper;
 import com.example.projectg101.Entidades.Product;
 import com.example.projectg101.Servicios.ProductService;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
+    private DBFirebase dbFirebase;
     private ProductService productService;
     private ListView listViewProducts;
     private ProductAdapter productAdapter;
@@ -35,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             dbHelper = new DBHelper(this);
+            dbFirebase = new DBFirebase();
             productService = new ProductService();
             arrayProducts = productService.cursorToArrayList(dbHelper.getProducts());
         }catch (Exception e){
@@ -43,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         productAdapter = new ProductAdapter(this, arrayProducts);
         listViewProducts.setAdapter(productAdapter);
+
+        dbFirebase.getProducts(productAdapter, arrayProducts);
     }
 
     @Override
