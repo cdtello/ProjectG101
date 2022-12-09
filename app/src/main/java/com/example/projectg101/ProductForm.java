@@ -9,14 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.projectg101.DB.DBFirebase;
-import com.example.projectg101.DB.DBHelper;
-import com.example.projectg101.Entidades.Product;
 import com.example.projectg101.Servicios.ProductService;
 
 public class ProductForm extends AppCompatActivity {
-    private DBHelper dbHelper;
-    private DBFirebase dbFirebase;
     private ProductService productService;
     private Button btnProductForm;
     private ImageView imgProductForm;
@@ -33,25 +28,10 @@ public class ProductForm extends AppCompatActivity {
         editDescriptionProductForm = (EditText) findViewById(R.id.editDescriptionProductForm);
         editPriceProductForm = (EditText) findViewById(R.id.editPriceProductForm);
 
-        dbHelper = new DBHelper(this);
-        dbFirebase = new DBFirebase();
+
         productService = new ProductService();
 
-        btnProductForm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Product product = new Product(
-                        editNameProductForm.getText().toString(),
-                        editDescriptionProductForm.getText().toString(),
-                        Integer.parseInt(editPriceProductForm.getText().toString()),
-                        productService.imageViewToByte(imgProductForm)
-                );
-                //dbHelper.insertProduct(product);
-                dbFirebase.insertProduct(product);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
 }

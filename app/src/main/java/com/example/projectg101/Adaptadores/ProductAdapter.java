@@ -2,16 +2,12 @@ package com.example.projectg101.Adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.projectg101.Entidades.Product;
 import com.example.projectg101.MainActivity2;
@@ -20,12 +16,12 @@ import com.example.projectg101.R;
 import java.util.ArrayList;
 
 public class ProductAdapter extends BaseAdapter {
-    private Context context;
     private ArrayList<Product> arrayProducts;
+    private Context context;
 
     public ProductAdapter(Context context, ArrayList<Product> arrayProducts) {
-        this.context = context;
         this.arrayProducts = arrayProducts;
+        this.context = context;
     }
 
     @Override
@@ -44,24 +40,18 @@ public class ProductAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView,
-                        ViewGroup viewGroup) {
-
+    public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        convertView = layoutInflater.inflate(R.layout.product_template, null);
+        view = layoutInflater.inflate(R.layout.product_template, null);
 
-        Product product = arrayProducts.get(position);
+        ImageView imgProduct = (ImageView) view.findViewById(R.id.imgProduct);
+        TextView tvNameProduct = (TextView) view.findViewById(R.id.tvNameProduct);
+        TextView tvDescriptionProduct = (TextView) view.findViewById(R.id.tvDescriptionProduct);
+        TextView tvPriceProduct = (TextView) view.findViewById(R.id.tvPriceProduct);
 
-        ImageView imgProduct = (ImageView) convertView.findViewById(R.id.imgProduct);
-        TextView tvNameProduct = (TextView) convertView.findViewById(R.id.tvNameProduct);
-        TextView tvDescriptionProduct = (TextView) convertView.findViewById(R.id.tvDescriptionProduct);
-        TextView tvPriceProduct = (TextView) convertView.findViewById(R.id.tvPriceProduct);
-        CheckBox checkBoxProduct = (CheckBox) convertView.findViewById(R.id.checkBoxProduct);
+        Product product = arrayProducts.get(i);
 
-        //byte[] image = product.getImage();
-        //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-
-        //imgProduct.setImageBitmap(bitmap);
+        imgProduct.setImageResource(R.drawable.dragon);
         tvNameProduct.setText(product.getName());
         tvDescriptionProduct.setText(product.getDescription());
         tvPriceProduct.setText(String.valueOf(product.getPrice()));
@@ -69,14 +59,15 @@ public class ProductAdapter extends BaseAdapter {
         imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), MainActivity2.class);
+                Intent intent =  new Intent(context.getApplicationContext(), MainActivity2.class);
                 intent.putExtra("name", product.getName());
                 intent.putExtra("description", product.getDescription());
                 intent.putExtra("price", product.getPrice());
-
+                intent.putExtra("image",product.getImage());
                 context.startActivity(intent);
             }
         });
-        return convertView;
+
+        return view;
     }
 }

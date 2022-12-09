@@ -1,41 +1,22 @@
 package com.example.projectg101;
 
-import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.projectg101.Adaptadores.ProductAdapter;
-import com.example.projectg101.DB.DBFirebase;
-import com.example.projectg101.DB.DBHelper;
 import com.example.projectg101.Entidades.Product;
-import com.example.projectg101.Servicios.ProductService;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private DBHelper dbHelper;
-    private DBFirebase dbFirebase;
-    private ProductService productService;
     private ListView listViewProducts;
     private ProductAdapter productAdapter;
     private ArrayList<Product> arrayProducts;
@@ -45,22 +26,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listViewProducts = (ListView) findViewById(R.id.listViewProducts);
         arrayProducts = new ArrayList<>();
+        // **** Productos para llenar
 
-        try {
-            dbHelper = new DBHelper(this);
-            dbFirebase = new DBFirebase();
-            productService = new ProductService();
-            arrayProducts = productService.cursorToArrayList(dbHelper.getProducts());
-        }catch (Exception e){
-            Log.e("DB Get", e.toString());
-        }
+        Product product1 = new Product("Producto1", "Desc1", 1000, "");
+        Product product2 = new Product("Producto2", "Desc2", 2000, "");
+        Product product3 = new Product("Producto3", "Desc3", 3000, "");
+        Product product4 = new Product("Producto4", "Desc4", 4000, "");
+        Product product5 = new Product("Producto5", "Desc5", 5000, "");
+        Product product6 = new Product("Producto6", "Desc6", 6000, "");
+        Product product7 = new Product("Producto7", "Desc7", 7000, "");
+        Product product8 = new Product("Producto8", "Desc8", 8000, "");
+        Product product9 = new Product("Producto9", "Desc9", 9000, "");
 
+        arrayProducts.add(product1);
+        arrayProducts.add(product2);
+        arrayProducts.add(product3);
+        arrayProducts.add(product4);
+        arrayProducts.add(product5);
+        arrayProducts.add(product6);
+        arrayProducts.add(product7);
+        arrayProducts.add(product8);
+        arrayProducts.add(product9);
+
+        // *************
+
+        listViewProducts = (ListView) findViewById(R.id.listViewProducts);
         productAdapter = new ProductAdapter(this, arrayProducts);
+
         listViewProducts.setAdapter(productAdapter);
 
-        dbFirebase.getProducts(productAdapter, arrayProducts);
     }
 
     @Override
