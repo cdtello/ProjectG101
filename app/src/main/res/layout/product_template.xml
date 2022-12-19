@@ -41,13 +41,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
+
+
         </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBoxProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="CheckBox" />
+    <Button
+        android:id="@+id/btnDeleteTemplate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_baseline_delete_24"
+         />
+    <Button
+        android:id="@+id/btnEditTemplate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_baseline_edit_24"
+        />
 
 </LinearLayout>

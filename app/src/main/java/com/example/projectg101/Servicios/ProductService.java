@@ -28,7 +28,9 @@ public class ProductService {
                     cursor.getString(1),
                     cursor.getString(2),
                     Integer.parseInt(cursor.getString(3)),
-                    cursor.getString(4)
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6)
                 );
                 list.add(product);
             }

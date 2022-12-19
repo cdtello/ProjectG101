@@ -8,21 +8,43 @@ public class Product {
     private String description;
     private int price;
     private String image;
+    private String latitud;
+    private String longitud;
 
-    public Product(String id, String name, String description, int price, String image) {
+    public Product(String id, String name, String description, int price, String image, String latitud, String longitud) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
-    public Product(String name, String description, int price, String image) {
+    public Product(String name, String description, int price, String image,  String latitud, String longitud) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 
     public String getId() {

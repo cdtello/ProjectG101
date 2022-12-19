@@ -99,9 +99,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()){
             case R.id.itemAdd:
-                Intent intent = new Intent(getApplicationContext(), ProductForm.class);
+                intent = new Intent(getApplicationContext(), ProductForm.class);
+                startActivity(intent);
+                return true;
+            case R.id.itemMap:
+                ArrayList<String> latitudes = new ArrayList<>();
+                ArrayList<String> longitudes = new ArrayList<>();
+                for (int i=0; i<arrayProducts.size(); i++){
+                    latitudes.add(arrayProducts.get(i).getLatitud());
+                    longitudes.add(arrayProducts.get(i).getLongitud());
+                }
+
+                intent = new Intent(getApplicationContext(), Maps.class);
+                intent.putStringArrayListExtra("latitudes", latitudes);
+                intent.putStringArrayListExtra("longitudes", longitudes);
                 startActivity(intent);
                 return true;
             case R.id.itemFavorite:

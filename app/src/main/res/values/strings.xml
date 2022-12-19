@@ -8,4 +8,5 @@
     <string name="product_form_description">Descripcion:</string>
     <string name="product_form_price">Precio:</string>
     <string name="product_form_btn">REGISTRAR</string>
+    <string name="title_activity_maps_google">MapsGoogle</string>
 </resources>
